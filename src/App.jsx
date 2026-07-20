@@ -5,12 +5,15 @@ import Footer from "./components/Footer";
 import CustomCursor from "./components/CustomCursor";
 
 import Home from "./pages/Home";
-import AboutPage from "./pages/AboutPage";
-import SkillsPage from "./pages/SkillsPage";
-import ProjectsPage from "./pages/ProjectsPage";
-import ContactPage from "./pages/ContactPage";
+import AboutPage from "./pages/Aboutpage.jsx";
+import SkillsPage from "./pages/Skillspage.jsx";
+import ProjectsPage from "./pages/Projectspage.jsx";
+import ContactPage from "./pages/Contactpage.jsx";
 import CertificatesPage from "./pages/Certificatespage"; // ✅ Fixed: renamed import
 import "./App.css";
+
+
+
 
 function App() {
   return (
