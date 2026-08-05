@@ -39,15 +39,11 @@ const Hero = () => {
               ✦ Available for Freelance Work
             </div>
 
-            <h1 className="text-5xl md:text-7xl font-bold text-white leading-tight">
-              Hi,
-              <br />
-              I'm{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#D8C3A5] to-[#B08968]">
-                Francis
-              </span>
-            </h1>
-
+          <h1 className="text-5xl md:text-7xl font-bold leading-tight text-transparent bg-clip-text bg-gradient-to-r from-[#D8C3A5] to-[#B08968]">
+  Hi,
+  <br />
+  I'm Francis
+</h1>
             <h2 className="text-2xl text-gray-300 mt-6">
               Frontend Developer
             </h2>

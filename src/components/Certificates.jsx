@@ -68,19 +68,36 @@ const Certificates = () => {
   };
 
   return (
-    <section className="min-h-screen py-32 px-4">
-      <div className="container mx-auto max-w-6xl">
+    <section
+      id="certificates"
+      className="min-h-screen py-32 px-4 bg-[#1A1A1A] relative overflow-hidden"
+    >
+      {/* Background Glow */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-20 left-10 w-72 h-72 rounded-full bg-[#D8C3A5]/10 blur-[140px]" />
+
+        <div className="absolute bottom-20 right-10 w-96 h-96 rounded-full bg-[#B08968]/10 blur-[160px]" />
+      </div>
+
+      <div className="container mx-auto max-w-6xl relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.1 }}
           transition={{ duration: 0.6 }}
         >
           <div className="text-center mb-12">
-            <h2 className="text-4xl md:text-5xl font-bold text-[#F6F1EB]">
-              My <span className="text-[#D8C3A5]">Certificates</span>
-            </h2>
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#D8C3A5] to-[#B08968]"
+            >
+              My Certificates
+            </motion.h2>
 
-            <p className="text-[#B7B7B7] max-w-2xl mx-auto mt-4">
+            <p className="text-[#B7B7B7] max-w-2xl mx-auto mt-4 leading-relaxed">
               Courses and internship credentials documenting my technical
               learning and practical development experience.
             </p>
@@ -91,10 +108,11 @@ const Certificates = () => {
               <motion.article
                 key={certificate.id}
                 initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.15, duration: 0.5 }}
                 whileHover={{ y: -8 }}
-                className="bg-[#262626] rounded-xl overflow-hidden border border-[#3A3A3A] hover:border-[#D8C3A5]/30 transition-all duration-300 group flex flex-col"
+                className="bg-[#262626] rounded-xl overflow-hidden border border-[#3A3A3A] hover:border-[#D8C3A5]/40 transition-all duration-300 group flex flex-col"
               >
                 <div
                   className="relative w-full h-56 bg-[#1A1A1A] overflow-hidden cursor-pointer"
@@ -103,6 +121,7 @@ const Certificates = () => {
                   }
                   role="button"
                   tabIndex={0}
+                  aria-label={`View ${certificate.title} certificate`}
                   onKeyDown={(event) => {
                     if (event.key === "Enter" || event.key === " ") {
                       handleViewCertificate(certificate.link, event);
@@ -149,12 +168,14 @@ const Certificates = () => {
                   </p>
 
                   <button
+                    type="button"
                     onClick={(event) =>
                       handleViewCertificate(certificate.link, event)
                     }
-                    className="inline-flex items-center gap-2 mt-auto pt-5 text-[#D8C3A5] hover:text-[#F6F1EB] transition-colors text-sm group-hover:gap-3 bg-transparent border-none cursor-pointer"
+                    className="inline-flex items-center gap-2 mt-auto pt-5 text-[#D8C3A5] hover:text-[#F6F1EB] transition-all text-sm group-hover:gap-3 bg-transparent border-none cursor-pointer"
                   >
                     View Credential
+
                     <FaExternalLinkAlt
                       size={12}
                       className="transition-transform group-hover:translate-x-1"
@@ -167,14 +188,16 @@ const Certificates = () => {
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.4, duration: 0.6 }}
             className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6 max-w-3xl mx-auto"
           >
             <div className="bg-[#262626] p-6 rounded-xl text-center border border-[#3A3A3A]">
               <div className="text-3xl font-bold text-[#D8C3A5]">
                 {certificates.length}
               </div>
+
               <div className="text-sm text-[#B7B7B7] mt-1">
                 Credentials
               </div>
@@ -182,6 +205,7 @@ const Certificates = () => {
 
             <div className="bg-[#262626] p-6 rounded-xl text-center border border-[#3A3A3A]">
               <div className="text-3xl font-bold text-[#D8C3A5]">10+</div>
+
               <div className="text-sm text-[#B7B7B7] mt-1">
                 Technologies Learned
               </div>
@@ -191,6 +215,7 @@ const Certificates = () => {
               <div className="text-3xl font-bold text-[#D8C3A5]">
                 2025–2026
               </div>
+
               <div className="text-sm text-[#B7B7B7] mt-1">
                 Active Learning
               </div>
@@ -199,8 +224,9 @@ const Certificates = () => {
 
           <motion.div
             initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.6 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.6, duration: 0.6 }}
             className="text-center mt-12"
           >
             <p className="text-[#B7B7B7] text-sm">

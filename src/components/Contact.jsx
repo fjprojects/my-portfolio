@@ -39,12 +39,12 @@ const contactLinks = [
 
 const Contact = () => {
   const [showModal, setShowModal] = useState(false);
+
   const [toast, setToast] = useState({
     show: false,
     message: "",
   });
 
-  // Disable body scrolling only while the modal is open
   useEffect(() => {
     const previousOverflow = document.body.style.overflow;
 
@@ -59,7 +59,6 @@ const Contact = () => {
     };
   }, [showModal]);
 
-  // Close modal when Escape is pressed
   useEffect(() => {
     const handleKeyDown = (event) => {
       if (event.key === "Escape") {
@@ -74,44 +73,44 @@ const Contact = () => {
     };
   }, []);
 
+  const showToastMessage = (message) => {
+    setToast({
+      show: true,
+      message,
+    });
+
+    setTimeout(() => {
+      setToast({
+        show: false,
+        message: "",
+      });
+    }, 3000);
+  };
+
   const handlePhoneClick = async () => {
     const phoneNumber = "+917907698580";
 
     try {
       await navigator.clipboard.writeText(phoneNumber);
-
-      setToast({
-        show: true,
-        message: "Phone number copied ✓",
-      });
-
-      setTimeout(() => {
-        setToast({
-          show: false,
-          message: "",
-        });
-      }, 3000);
+      showToastMessage("Phone number copied ✓");
     } catch (error) {
-      setToast({
-        show: true,
-        message: "Could not copy phone number",
-      });
-
-      setTimeout(() => {
-        setToast({
-          show: false,
-          message: "",
-        });
-      }, 3000);
+      showToastMessage("Could not copy phone number");
     }
   };
 
   return (
     <section
       id="contact"
-      className="relative min-h-[calc(100vh-80px)] px-4 py-20"
+      className="relative min-h-[calc(100vh-80px)] overflow-hidden bg-[#111111] px-4 py-20"
     >
-      <div className="container mx-auto text-center">
+      {/* Background glow */}
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute left-10 top-20 h-72 w-72 rounded-full bg-[#D8C3A5]/10 blur-[140px]" />
+
+        <div className="absolute bottom-20 right-10 h-96 w-96 rounded-full bg-[#B08968]/10 blur-[160px]" />
+      </div>
+
+      <div className="container relative z-10 mx-auto text-center">
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
@@ -119,13 +118,13 @@ const Contact = () => {
           transition={{ duration: 0.8 }}
         >
           <motion.h2
-            className="mb-4 text-4xl font-bold text-[#F6F1EB]"
+            className="mb-4 bg-gradient-to-r from-[#D8C3A5] to-[#B08968] bg-clip-text text-4xl font-bold text-transparent md:text-5xl"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
           >
-            Let's <span className="text-[#D8C3A5]">Connect</span>
+            Let's Connect
           </motion.h2>
 
           <motion.p
@@ -277,13 +276,9 @@ const Contact = () => {
                     stiffness: 220,
                     damping: 22,
                   }}
-                  whileHover={{
-                    boxShadow: "0 0 50px rgba(216,195,165,0.12)",
-                  }}
                   onClick={(event) => event.stopPropagation()}
                   className="relative w-full max-w-lg rounded-3xl border border-[#3B3B3B] bg-[#1F1F1F] p-8 shadow-[0_20px_60px_rgba(0,0,0,0.6)]"
                 >
-                  {/* Close button */}
                   <motion.button
                     type="button"
                     onClick={() => setShowModal(false)}
@@ -298,7 +293,6 @@ const Contact = () => {
                     <FaTimes size={20} />
                   </motion.button>
 
-                  {/* Profile icon */}
                   <div className="mb-4 flex justify-center">
                     <motion.div
                       initial={{ scale: 0 }}
@@ -315,7 +309,6 @@ const Contact = () => {
                     </motion.div>
                   </div>
 
-                  {/* Heading */}
                   <div className="mb-2 flex items-center justify-center gap-3">
                     <FaHandshake className="text-2xl text-[#D8C3A5]" />
 
@@ -331,7 +324,6 @@ const Contact = () => {
                     Choose your preferred way to connect.
                   </p>
 
-                  {/* Email button */}
                   <motion.a
                     href="https://mail.google.com/mail/?view=cm&fs=1&to=francisjob.coder@gmail.com&su=Job%20Opportunity"
                     target="_blank"
@@ -345,14 +337,10 @@ const Contact = () => {
                     whileTap={{ scale: 0.98 }}
                     className="flex w-full items-center justify-center gap-3 rounded-xl bg-gradient-to-r from-[#D8C3A5] to-[#C7A97F] py-4 font-medium text-[#151515] transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#D8C3A5]"
                   >
-                    <motion.div whileHover={{ rotate: -10 }}>
-                      <FaEnvelope size={18} />
-                    </motion.div>
-
+                    <FaEnvelope size={18} />
                     Continue with Email
                   </motion.a>
 
-                  {/* Divider */}
                   <div className="my-6 flex items-center gap-4">
                     <div className="h-px flex-1 bg-[#3B3B3B]" />
 
@@ -363,7 +351,6 @@ const Contact = () => {
                     <div className="h-px flex-1 bg-[#3B3B3B]" />
                   </div>
 
-                  {/* LinkedIn button */}
                   <motion.a
                     href="https://linkedin.com/in/francis-job"
                     target="_blank"
@@ -378,14 +365,10 @@ const Contact = () => {
                     whileTap={{ scale: 0.98 }}
                     className="flex w-full items-center justify-center gap-3 rounded-xl border border-[#D8C3A5] py-4 font-medium text-[#F6F1EB] transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#D8C3A5]"
                   >
-                    <motion.div whileHover={{ rotate: 10 }}>
-                      <FaLinkedin size={18} />
-                    </motion.div>
-
+                    <FaLinkedin size={18} />
                     Continue with LinkedIn
                   </motion.a>
 
-                  {/* Cancel button */}
                   <motion.button
                     type="button"
                     onClick={() => setShowModal(false)}
