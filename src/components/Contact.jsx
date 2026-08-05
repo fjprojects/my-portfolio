@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import React, { useEffect, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import {
   FaEnvelope,
+  FaFileDownload,
   FaGithub,
+  FaHandshake,
   FaLinkedin,
   FaPhone,
-  FaFileDownload,
-  FaHandshake,
   FaTimes,
   FaUser,
 } from "react-icons/fa";
@@ -39,51 +39,78 @@ const contactLinks = [
 
 const Contact = () => {
   const [showModal, setShowModal] = useState(false);
-  const [toast, setToast] = useState({ show: false, message: "" });
+  const [toast, setToast] = useState({
+    show: false,
+    message: "",
+  });
 
-  // Disable background scrolling when modal is open
+  // Disable body scrolling only while the modal is open
   useEffect(() => {
-    document.body.style.overflow = showModal ? "hidden" : "auto";
+    const previousOverflow = document.body.style.overflow;
+
+    if (showModal) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
 
     return () => {
-      document.body.style.overflow = "auto";
+      document.body.style.overflow = previousOverflow;
     };
   }, [showModal]);
 
-  // Close modal on Escape key
+  // Close modal when Escape is pressed
   useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (e.key === "Escape") {
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape") {
         setShowModal(false);
       }
     };
 
     window.addEventListener("keydown", handleKeyDown);
 
-    return () => window.removeEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
   }, []);
 
-  // Handle phone number copy
-  const handlePhoneClick = () => {
+  const handlePhoneClick = async () => {
     const phoneNumber = "+917907698580";
-    navigator.clipboard.writeText(phoneNumber).then(() => {
-      setToast({ show: true, message: "Phone number copied ✓" });
-      setTimeout(() => {
-        setToast({ show: false, message: "" });
-      }, 3000);
-    });
-  };
 
-  // Handle icon clicks
-  const handleIconClick = (item) => {
-    if (item.isPhone) {
-      handlePhoneClick();
+    try {
+      await navigator.clipboard.writeText(phoneNumber);
+
+      setToast({
+        show: true,
+        message: "Phone number copied ✓",
+      });
+
+      setTimeout(() => {
+        setToast({
+          show: false,
+          message: "",
+        });
+      }, 3000);
+    } catch (error) {
+      setToast({
+        show: true,
+        message: "Could not copy phone number",
+      });
+
+      setTimeout(() => {
+        setToast({
+          show: false,
+          message: "",
+        });
+      }, 3000);
     }
-    // For other items, the link opens normally
   };
 
   return (
-    <section id="contact" className="py-20 px-4 relative">
+    <section
+      id="contact"
+      className="relative min-h-[calc(100vh-80px)] px-4 py-20"
+    >
       <div className="container mx-auto text-center">
         <motion.div
           initial={{ opacity: 0 }}
@@ -92,41 +119,46 @@ const Contact = () => {
           transition={{ duration: 0.8 }}
         >
           <motion.h2
-            className="text-4xl font-bold mb-4 text-[#F6F1EB]"
+            className="mb-4 text-4xl font-bold text-[#F6F1EB]"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
             transition={{ delay: 0.2 }}
           >
             Let's <span className="text-[#D8C3A5]">Connect</span>
           </motion.h2>
 
           <motion.p
-            className="text-[#B7B7B7] max-w-2xl mx-auto mb-10"
+            className="mx-auto mb-10 max-w-2xl text-[#B7B7B7]"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
             transition={{ delay: 0.3 }}
           >
             Interested in collaborating on software, AI, or innovative
             projects? Feel free to reach out.
           </motion.p>
 
-          {/* Contact Icons */}
+          {/* Contact icons */}
           <motion.div
-            className="flex flex-wrap justify-center gap-6 mb-10"
+            className="mb-10 flex flex-wrap justify-center gap-6"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
             transition={{ delay: 0.4 }}
           >
-            {contactLinks.map((item, index) => {
+            {contactLinks.map((item) => {
               const Icon = item.icon;
 
               if (item.isPhone) {
                 return (
                   <motion.button
-                    key={index}
+                    key={item.label}
+                    type="button"
                     onClick={handlePhoneClick}
                     title={item.label}
-                    className="p-4 bg-[#262626] rounded-full border border-[#3A3A3A] text-[#B7B7B7] hover:border-[#D8C3A5] hover:text-[#D8C3A5] transition cursor-pointer"
+                    aria-label={item.label}
+                    className="cursor-pointer rounded-full border border-[#3A3A3A] bg-[#262626] p-4 text-[#B7B7B7] transition hover:border-[#D8C3A5] hover:text-[#D8C3A5]"
                     whileHover={{
                       scale: 1.15,
                       boxShadow: "0 0 30px rgba(216,195,165,0.15)",
@@ -140,12 +172,13 @@ const Contact = () => {
 
               return (
                 <motion.a
-                  key={index}
+                  key={item.label}
                   href={item.link}
-                  target={item.target || "_blank"}
+                  target={item.target}
                   rel="noopener noreferrer"
                   title={item.label}
-                  className="p-4 bg-[#262626] rounded-full border border-[#3A3A3A] text-[#B7B7B7] hover:border-[#D8C3A5] hover:text-[#D8C3A5] transition"
+                  aria-label={item.label}
+                  className="rounded-full border border-[#3A3A3A] bg-[#262626] p-4 text-[#B7B7B7] transition hover:border-[#D8C3A5] hover:text-[#D8C3A5]"
                   whileHover={{
                     scale: 1.15,
                     boxShadow: "0 0 30px rgba(216,195,165,0.15)",
@@ -158,21 +191,23 @@ const Contact = () => {
             })}
           </motion.div>
 
-          {/* Buttons */}
+          {/* Action buttons */}
           <motion.div
-            className="flex flex-col sm:flex-row gap-4 justify-center"
+            className="flex flex-col justify-center gap-4 sm:flex-row"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
             transition={{ delay: 0.5 }}
           >
             <motion.button
+              type="button"
               onClick={() => setShowModal(true)}
               whileHover={{
                 scale: 1.05,
                 boxShadow: "0 0 40px rgba(216,195,165,0.3)",
               }}
               whileTap={{ scale: 0.95 }}
-              className="px-8 py-3 bg-gradient-to-r from-[#D8C3A5] to-[#B08968] text-[#151515] rounded-full font-medium focus:outline-none focus:ring-2 focus:ring-[#D8C3A5]"
+              className="rounded-full bg-gradient-to-r from-[#D8C3A5] to-[#B08968] px-8 py-3 font-medium text-[#151515] focus:outline-none focus:ring-2 focus:ring-[#D8C3A5]"
             >
               Hire Me
             </motion.button>
@@ -187,38 +222,41 @@ const Contact = () => {
                 color: "#D8C3A5",
               }}
               whileTap={{ scale: 0.95 }}
-              className="px-8 py-3 border border-[#3A3A3A] rounded-full font-medium text-[#F6F1EB] flex items-center justify-center gap-2 transition focus:outline-none focus:ring-2 focus:ring-[#D8C3A5]"
+              className="flex items-center justify-center gap-2 rounded-full border border-[#3A3A3A] px-8 py-3 font-medium text-[#F6F1EB] transition focus:outline-none focus:ring-2 focus:ring-[#D8C3A5]"
             >
               <FaFileDownload size={16} />
               Download Resume
             </motion.a>
           </motion.div>
 
-          {/* Toast Notification */}
+          {/* Toast */}
           <AnimatePresence>
             {toast.show && (
               <motion.div
                 initial={{ opacity: 0, y: -50 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -50 }}
-                className="fixed top-8 left-1/2 transform -translate-x-1/2 z-[60] bg-[#1F1F1F] border border-[#D8C3A5] text-[#F6F1EB] px-6 py-3 rounded-xl shadow-2xl"
+                className="fixed left-1/2 top-8 z-[60] -translate-x-1/2 rounded-xl border border-[#D8C3A5] bg-[#1F1F1F] px-6 py-3 text-[#F6F1EB] shadow-2xl"
               >
                 {toast.message}
               </motion.div>
             )}
           </AnimatePresence>
 
-          {/* Contact Modal */}
+          {/* Contact modal */}
           <AnimatePresence>
             {showModal && (
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                className="fixed inset-0 bg-black/75 backdrop-blur-sm flex items-center justify-center z-50 px-4"
+                className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 px-4 backdrop-blur-sm"
                 onClick={() => setShowModal(false)}
               >
                 <motion.div
+                  role="dialog"
+                  aria-modal="true"
+                  aria-labelledby="contact-modal-title"
                   initial={{
                     opacity: 0,
                     scale: 0.92,
@@ -242,46 +280,26 @@ const Contact = () => {
                   whileHover={{
                     boxShadow: "0 0 50px rgba(216,195,165,0.12)",
                   }}
-                  onClick={(e) => e.stopPropagation()}
-                  className="
-                    w-full
-                    max-w-lg
-                    rounded-3xl
-                    bg-[#1F1F1F]
-                    border
-                    border-[#3B3B3B]
-                    shadow-[0_20px_60px_rgba(0,0,0,0.6)]
-                    p-8
-                    relative
-                  "
+                  onClick={(event) => event.stopPropagation()}
+                  className="relative w-full max-w-lg rounded-3xl border border-[#3B3B3B] bg-[#1F1F1F] p-8 shadow-[0_20px_60px_rgba(0,0,0,0.6)]"
                 >
-                  {/* Close Button */}
+                  {/* Close button */}
                   <motion.button
+                    type="button"
                     onClick={() => setShowModal(false)}
-                    whileHover={{ 
+                    aria-label="Close contact modal"
+                    whileHover={{
                       backgroundColor: "#353535",
                       rotate: 90,
                     }}
                     transition={{ duration: 0.3 }}
-                    className="
-                      absolute
-                      top-4
-                      right-4
-                      text-[#9D9D9D]
-                      hover:text-white
-                      transition
-                      p-2
-                      rounded-full
-                      focus:outline-none
-                      focus:ring-2
-                      focus:ring-[#D8C3A5]
-                    "
+                    className="absolute right-4 top-4 rounded-full p-2 text-[#9D9D9D] transition hover:text-white focus:outline-none focus:ring-2 focus:ring-[#D8C3A5]"
                   >
                     <FaTimes size={20} />
                   </motion.button>
 
-                  {/* Profile Photo */}
-                  <div className="flex justify-center mb-4">
+                  {/* Profile icon */}
+                  <div className="mb-4 flex justify-center">
                     <motion.div
                       initial={{ scale: 0 }}
                       animate={{ scale: 1 }}
@@ -291,25 +309,29 @@ const Contact = () => {
                         damping: 15,
                         delay: 0.1,
                       }}
-                      className="w-20 h-20 rounded-full bg-gradient-to-br from-[#D8C3A5] to-[#B08968] flex items-center justify-center border-2 border-[#D8C3A5] shadow-lg"
+                      className="flex h-20 w-20 items-center justify-center rounded-full border-2 border-[#D8C3A5] bg-gradient-to-br from-[#D8C3A5] to-[#B08968] shadow-lg"
                     >
                       <FaUser size={32} className="text-[#151515]" />
                     </motion.div>
                   </div>
 
-                  {/* Header with Icon */}
-                  <div className="flex items-center justify-center gap-3 mb-2">
-                    <FaHandshake className="text-[#D8C3A5] text-2xl" />
-                    <h3 className="text-2xl font-bold text-[#F6F1EB]">
+                  {/* Heading */}
+                  <div className="mb-2 flex items-center justify-center gap-3">
+                    <FaHandshake className="text-2xl text-[#D8C3A5]" />
+
+                    <h3
+                      id="contact-modal-title"
+                      className="text-2xl font-bold text-[#F6F1EB]"
+                    >
                       Let's Build Something Amazing
                     </h3>
                   </div>
 
-                  <p className="text-[#B7B7B7] mb-8 text-center">
+                  <p className="mb-8 text-center text-[#B7B7B7]">
                     Choose your preferred way to connect.
                   </p>
 
-                  {/* Email Button */}
+                  {/* Email button */}
                   <motion.a
                     href="https://mail.google.com/mail/?view=cm&fs=1&to=francisjob.coder@gmail.com&su=Job%20Opportunity"
                     target="_blank"
@@ -321,40 +343,27 @@ const Contact = () => {
                       boxShadow: "0 10px 30px rgba(216,195,165,0.3)",
                     }}
                     whileTap={{ scale: 0.98 }}
-                    className="
-                      flex
-                      items-center
-                      justify-center
-                      gap-3
-                      w-full
-                      py-4
-                      rounded-xl
-                      font-medium
-                      bg-gradient-to-r
-                      from-[#D8C3A5]
-                      to-[#C7A97F]
-                      text-[#151515]
-                      transition-all
-                      duration-300
-                      focus:outline-none
-                      focus:ring-2
-                      focus:ring-[#D8C3A5]
-                    "
+                    className="flex w-full items-center justify-center gap-3 rounded-xl bg-gradient-to-r from-[#D8C3A5] to-[#C7A97F] py-4 font-medium text-[#151515] transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#D8C3A5]"
                   >
                     <motion.div whileHover={{ rotate: -10 }}>
                       <FaEnvelope size={18} />
                     </motion.div>
+
                     Continue with Email
                   </motion.a>
 
                   {/* Divider */}
-                  <div className="flex items-center gap-4 my-6">
-                    <div className="flex-1 h-px bg-[#3B3B3B]"></div>
-                    <span className="text-[#9D9D9D] text-sm font-medium">OR</span>
-                    <div className="flex-1 h-px bg-[#3B3B3B]"></div>
+                  <div className="my-6 flex items-center gap-4">
+                    <div className="h-px flex-1 bg-[#3B3B3B]" />
+
+                    <span className="text-sm font-medium text-[#9D9D9D]">
+                      OR
+                    </span>
+
+                    <div className="h-px flex-1 bg-[#3B3B3B]" />
                   </div>
 
-                  {/* LinkedIn Button */}
+                  {/* LinkedIn button */}
                   <motion.a
                     href="https://linkedin.com/in/francis-job"
                     target="_blank"
@@ -367,50 +376,25 @@ const Contact = () => {
                       color: "#151515",
                     }}
                     whileTap={{ scale: 0.98 }}
-                    className="
-                      flex
-                      items-center
-                      justify-center
-                      gap-3
-                      w-full
-                      py-4
-                      rounded-xl
-                      border
-                      border-[#D8C3A5]
-                      text-[#F6F1EB]
-                      transition-all
-                      duration-300
-                      focus:outline-none
-                      focus:ring-2
-                      focus:ring-[#D8C3A5]
-                    "
+                    className="flex w-full items-center justify-center gap-3 rounded-xl border border-[#D8C3A5] py-4 font-medium text-[#F6F1EB] transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#D8C3A5]"
                   >
                     <motion.div whileHover={{ rotate: 10 }}>
                       <FaLinkedin size={18} />
                     </motion.div>
+
                     Continue with LinkedIn
                   </motion.a>
 
-                  {/* Cancel Button */}
+                  {/* Cancel button */}
                   <motion.button
+                    type="button"
                     onClick={() => setShowModal(false)}
                     whileHover={{
                       backgroundColor: "#2D2D2D",
                       color: "#FFFFFF",
                     }}
                     whileTap={{ scale: 0.98 }}
-                    className="
-                      w-full
-                      mt-6
-                      py-3
-                      rounded-xl
-                      text-[#9D9D9D]
-                      transition
-                      font-medium
-                      focus:outline-none
-                      focus:ring-2
-                      focus:ring-[#D8C3A5]
-                    "
+                    className="mt-6 w-full rounded-xl py-3 font-medium text-[#9D9D9D] transition focus:outline-none focus:ring-2 focus:ring-[#D8C3A5]"
                   >
                     Cancel
                   </motion.button>

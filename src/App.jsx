@@ -31,7 +31,7 @@ function App() {
           <Route path="/projects" element={<ProjectsPage />} />
           <Route path="/#projects" element={<ProjectsPage />} />
           <Route path="/contact" element={<ContactPage />} />
-          <Route path="/certificates" element={<CertificatesPage />} /> {/* ✅ Fixed: using correct variable name */}
+          <Route path="/certificates" element={<CertificatesPage />} /> 
         </Routes>
       </main>
 

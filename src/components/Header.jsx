@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import {
   FaGithub,
@@ -14,7 +14,7 @@ const links = [
   { name: "About", path: "/about" },
   { name: "Skills", path: "/skills" },
   { name: "Projects", path: "/projects" },
-  { name: "Certificates", path: "/certificates"},
+  { name: "Certificates", path: "/certificates" },
   { name: "Contact", path: "/contact" },
 ];
 
@@ -23,41 +23,50 @@ const Header = () => {
   const [scrolled, setScrolled] = useState(false);
 
   const location = useLocation();
+  const isContactPage = location.pathname === "/contact";
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
     };
 
+    handleScroll();
+
     window.addEventListener("scroll", handleScroll);
 
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
+
+  useEffect(() => {
+    setIsOpen(false);
+  }, [location.pathname]);
 
   return (
     <motion.header
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
+      className={`fixed left-0 top-0 z-50 w-full transition-all duration-500 ${
         scrolled
-          ? "bg-[#151515]/95 backdrop-blur-md border-b border-[#3A3A3A]"
+          ? "border-b border-[#3A3A3A] bg-[#151515]/95 backdrop-blur-md"
           : "bg-transparent"
       }`}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.6 }}
     >
-      <div className="container mx-auto px-6 py-5 flex justify-between items-center">
-        {/* Logo */}
+      <div className="container mx-auto flex items-center justify-between px-6 py-5">
+        {/* Logo container with fixed width */}
+        <div className="flex w-[160px] justify-start">
+          <NavLink
+            to="/"
+            className="whitespace-nowrap text-2xl font-bold tracking-wide text-[#D8C3A5]"
+          >
+            Francis Job
+          </NavLink>
+        </div>
 
-        <NavLink
-          to="/"
-          className="text-2xl font-bold text-[#D8C3A5] tracking-wide"
-        >
-          Francis Job
-        </NavLink>
-
-        {/* Desktop Navigation */}
-
-        <nav className="hidden md:flex items-center gap-8">
+        {/* Desktop navigation */}
+        <nav className="hidden items-center gap-8 md:flex">
           {links.map((item, index) => (
             <motion.div
               key={item.name}
@@ -68,73 +77,86 @@ const Header = () => {
               <NavLink
                 to={item.path}
                 className={({ isActive }) =>
-                  `relative transition duration-300 group ${
+                  `group relative whitespace-nowrap font-medium transition-colors duration-300 ${
                     isActive
                       ? "text-[#D8C3A5]"
                       : "text-[#F6F1EB] hover:text-[#D8C3A5]"
                   }`
                 }
               >
-                {item.name}
+                {({ isActive }) => (
+                  <>
+                    {item.name}
 
-                <span className="absolute left-0 -bottom-1 h-[2px] w-0 bg-[#D8C3A5] transition-all duration-300 group-hover:w-full"></span>
+                    <span
+                      className={`absolute -bottom-1 left-0 h-[2px] bg-[#D8C3A5] transition-all duration-300 ${
+                        isActive ? "w-full" : "w-0 group-hover:w-full"
+                      }`}
+                    />
+                  </>
+                )}
               </NavLink>
             </motion.div>
           ))}
         </nav>
 
-        {/* Hide icons only on Contact page */}
+        {/* Always preserve this container's width */}
+        <div
+          className={`hidden w-[160px] items-center justify-end gap-5 md:flex ${
+            isContactPage ? "invisible pointer-events-none" : "visible"
+          }`}
+        >
+          <a
+            href="https://github.com/fjprojects"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="GitHub"
+            className="text-[#B7B7B7] transition-colors hover:text-[#D8C3A5]"
+          >
+            <FaGithub size={20} />
+          </a>
 
-        {location.pathname !== "/contact" && (
-          <div className="hidden md:flex items-center gap-5">
-            <a
-              href="https://github.com/"
-              target="_blank"
-              rel="noreferrer"
-              className="text-[#B7B7B7] hover:text-[#D8C3A5]"
-            >
-              <FaGithub size={20} />
-            </a>
+          <a
+            href="https://linkedin.com/in/francis-job"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="LinkedIn"
+            className="text-[#B7B7B7] transition-colors hover:text-[#D8C3A5]"
+          >
+            <FaLinkedin size={20} />
+          </a>
 
-            <a
-              href="https://linkedin.com/"
-              target="_blank"
-              rel="noreferrer"
-              className="text-[#B7B7B7] hover:text-[#D8C3A5]"
-            >
-              <FaLinkedin size={20} />
-            </a>
+          <a
+            href="https://twitter.com/"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="Twitter"
+            className="text-[#B7B7B7] transition-colors hover:text-[#D8C3A5]"
+          >
+            <FaTwitter size={20} />
+          </a>
+        </div>
 
-            <a
-              href="https://twitter.com/"
-              target="_blank"
-              rel="noreferrer"
-              className="text-[#B7B7B7] hover:text-[#D8C3A5]"
-            >
-              <FaTwitter size={20} />
-            </a>
-          </div>
-        )}
-
-        {/* Mobile Button */}
-
+        {/* Mobile menu button */}
         <button
-          className="md:hidden text-[#F6F1EB] text-2xl"
-          onClick={() => setIsOpen(!isOpen)}
+          type="button"
+          className="text-2xl text-[#F6F1EB] md:hidden"
+          onClick={() => setIsOpen((previous) => !previous)}
+          aria-label={isOpen ? "Close menu" : "Open menu"}
+          aria-expanded={isOpen}
         >
           {isOpen ? <FaTimes /> : <FaBars />}
         </button>
       </div>
 
-      {/* Mobile Menu */}
-
+      {/* Mobile menu */}
       {isOpen && (
         <motion.div
           initial={{ opacity: 0, height: 0 }}
           animate={{ opacity: 1, height: "auto" }}
-          className="md:hidden bg-[#151515] border-t border-[#333]"
+          className="border-t border-[#333] bg-[#151515] md:hidden"
         >
-          <div className="flex flex-col px-6 py-6 gap-5">
+          <div className="flex flex-col gap-5 px-6 py-6">
             {links.map((item) => (
               <NavLink
                 key={item.name}
@@ -150,20 +172,22 @@ const Header = () => {
               </NavLink>
             ))}
 
-            {location.pathname !== "/contact" && (
-              <div className="flex gap-5 pt-4 border-t border-[#333]">
+            {!isContactPage && (
+              <div className="flex gap-5 border-t border-[#333] pt-4">
                 <a
-                  href="https://github.com/"
+                  href="https://github.com/fjprojects"
                   target="_blank"
                   rel="noreferrer"
+                  aria-label="GitHub"
                 >
                   <FaGithub size={20} />
                 </a>
 
                 <a
-                  href="https://linkedin.com/"
+                  href="https://linkedin.com/in/francis-job"
                   target="_blank"
                   rel="noreferrer"
+                  aria-label="LinkedIn"
                 >
                   <FaLinkedin size={20} />
                 </a>
@@ -172,6 +196,7 @@ const Header = () => {
                   href="https://twitter.com/"
                   target="_blank"
                   rel="noreferrer"
+                  aria-label="Twitter"
                 >
                   <FaTwitter size={20} />
                 </a>

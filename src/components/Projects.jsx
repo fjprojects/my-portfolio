@@ -1,100 +1,190 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
-
+import React from "react";
+import { motion } from "framer-motion";
+import {
+  FaGithub,
+  FaExternalLinkAlt,
+  FaCheckCircle,
+  FaTools,
+  FaClock,
+} from "react-icons/fa";
 const projects = [
   {
-    title: "OcuSense AI - Eye Health Monitoring System",
+    title: "OcuSense AI",
+    subtitle: "Eye Health Monitoring System",
     description:
-      "Real-time eye health monitoring web application that uses computer vision to track blink patterns, screen usage, posture, and focus sessions through the device camera.",
+      "A full-stack screen-wellness platform that uses computer vision to monitor blink rate, estimated screen distance, head position, focus duration, hydration, medicine reminders, and monitoring history.",
     tech: [
       "React",
       "Django",
       "MediaPipe",
       "Computer Vision",
-      "Python"
+      "Python",
+      "Bootstrap",
     ],
-    github: "#",
-    live: "#"
+    status: "completed",
+    github: "https://github.com/fjprojects/OcuSense-AI",
+    live: "https://ocusense-ai-13.onrender.com/",
   },
   {
-    title: "Timberly - E-Commerce Platform",
+    title: "Timberly",
+    subtitle: "Furniture E-Commerce Platform",
     description:
-      "Modern furniture e-commerce website with responsive design, product browsing, category sections, shopping cart management, and interactive UI components.",
+      "A responsive furniture shopping platform with product browsing, category sections, cart management, reusable components, interactive sliders, routing, and planned backend integration.",
     tech: [
       "React",
       "Vite",
       "React Router",
       "Swiper",
-      "Tailwind CSS"
+      "Django",
     ],
+    status: "in-progress",
     github: "#",
-    live: "#"
+    live: "#",
   },
   {
-    title: "Disease Predictor ML System",
+    title: "Developer Portfolio",
+    subtitle: "Personal Portfolio Website",
     description:
-      "Machine learning based disease prediction system that analyzes symptom data and predicts possible health conditions using classification algorithms.",
+      "A modern responsive portfolio showcasing my projects, technical skills, certificates, education, and contact information with smooth motion effects and reusable components.",
     tech: [
-      "Python",
-      "Machine Learning",
-      "Jupyter Notebook",
-      "Random Forest"
+      "React",
+      "Vite",
+      "Tailwind CSS",
+      "Framer Motion",
+      "React Router",
     ],
-    github: "#",
-    live: "#"
+    status: "completed",
+    github: "https://github.com/fjprojects/my-portfolio",
+    live: "https://francis-portfolio-bqnn.onrender.com/",
   },
   {
-    title: "DNA Sequence Calculator",
+    title: "Bus Route Information System",
+    subtitle: "Public Transport Route Assistant",
     description:
-      "Bioinformatics utility tool for analyzing DNA sequences with nucleotide counting, GC percentage calculation, and basic genetic sequence operations.",
+      "A planned transport platform that helps users search bus routes, discover stops, compare possible journeys, and access route information through a simple interface.",
     tech: [
-      "Python",
-      "C",
-      "Bioinformatics"
+      "React",
+      "Django",
+      "REST API",
+      "Maps",
+      "PostgreSQL",
     ],
+    status: "upcoming",
     github: "#",
-    live: "#"
+    live: "#",
   },
   {
-    title: "Codon to Anticodon Converter",
+    title: "AI Study Analyzer",
+    subtitle: "Study Performance Analytics Platform",
     description:
-      "Genetics-based application that converts RNA codons into corresponding anticodon sequences to demonstrate biological translation concepts.",
+      "A React and Django application that records structured study sessions and displays performance history. The current prototype is still under development.",
     tech: [
+      "React",
+      "Django",
+      "REST API",
       "Python",
-      "Genetics",
-      "Biology"
+      "SQLite",
     ],
+    status: "in-progress",
     github: "#",
-    live: "#"
+    live: "#",
   },
   {
-    title: "Anemia Check Analyzer",
+    title: "AI Recovery Assistant",
+    subtitle: "Camera-Based Rehabilitation Support",
     description:
-      "Healthcare analysis application that evaluates anemia-related parameters and provides basic insights from user-provided health data.",
+      "A planned computer-vision system that analyzes prescribed physiotherapy exercises, measures joint angles, counts correct repetitions, detects movement errors, and tracks recovery progress.",
     tech: [
+      "React",
+      "Django",
+      "MediaPipe Pose",
+      "OpenCV",
+      "Computer Vision",
       "Python",
-      "Healthcare",
-      "Data Analysis"
     ],
+    status: "upcoming",
     github: "#",
-    live: "#"
-  }
+    live: "#",
+  },
+  {
+    title: "GaitGuardian",
+    subtitle: "Mobility and Fall-Risk Monitoring",
+    description:
+      "A future healthcare computer-vision system designed to analyze walking patterns, track mobility changes, measure gait symmetry, speed, balance, and hesitation, and alert caregivers to meaningful decline.",
+    tech: [
+      "React",
+      "Django",
+      "MediaPipe Pose",
+      "OpenCV",
+      "Time-Series Analysis",
+      "Python",
+    ],
+    status: "upcoming",
+    github: "#",
+    live: "#",
+  },
 ];
+
+const statusConfig = {
+  completed: {
+    label: "Completed",
+    icon: FaCheckCircle,
+    className:
+      "bg-emerald-500/10 text-emerald-400 border-emerald-500/20",
+  },
+  "in-progress": {
+    label: "In Progress",
+    icon: FaTools,
+    className:
+      "bg-amber-500/10 text-amber-400 border-amber-500/20",
+  },
+  upcoming: {
+    label: "Upcoming",
+    icon: FaClock,
+    className:
+      "bg-blue-500/10 text-blue-400 border-blue-500/20",
+  },
+};
+
+const ProjectLink = ({ href, icon, children }) => {
+  const unavailable = !href || href === "#";
+
+  if (unavailable) {
+    return (
+      <span
+        className="flex items-center gap-2 text-sm text-[#777777] cursor-not-allowed"
+        title="Not available yet"
+      >
+        {icon}
+        {children}
+      </span>
+    );
+  }
+
+  return (
+    <motion.a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="flex items-center gap-2 text-sm text-[#B7B7B7] hover:text-[#D8C3A5] transition-colors"
+      whileHover={{ x: 3 }}
+    >
+      {icon}
+      {children}
+    </motion.a>
+  );
+};
 
 const Projects = () => {
   return (
     <section id="projects" className="py-20 px-4 bg-[#1A1A1A]">
-
       <div className="container mx-auto">
-
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, amount: 0.15 }}
           transition={{ duration: 0.8 }}
         >
-
           <motion.h2
             className="text-4xl font-bold mb-4 text-center text-[#F6F1EB]"
             initial={{ opacity: 0, y: 20 }}
@@ -102,207 +192,103 @@ const Projects = () => {
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
           >
-            Featured <span className="text-[#D8C3A5]">Projects</span>
+            Featured{" "}
+            <span className="text-[#D8C3A5]">Projects</span>
           </motion.h2>
 
-
           <motion.p
-            className="text-[#B7B7B7] text-center max-w-2xl mx-auto mb-12"
+            className="text-[#B7B7B7] text-center max-w-2xl mx-auto mb-12 leading-relaxed"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.3 }}
           >
-            Projects combining software engineering, artificial intelligence,
-            and computational biology to solve real-world problems.
+            Full-stack, computer-vision, healthcare, and transport
+            projects I have completed, am developing, or plan to build.
           </motion.p>
 
-
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {projects.map((project, index) => {
+              const status =
+                statusConfig[project.status] || statusConfig.upcoming;
 
-            {projects.map((project, index) => (
+              const StatusIcon = status.icon;
 
-              <motion.div
-                key={index}
+              return (
+                <motion.article
+                  key={project.title}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.15 }}
+                  transition={{
+                    delay: index * 0.1,
+                    duration: 0.55,
+                  }}
+                  whileHover={{
+                    y: -8,
+                    borderColor: "#D8C3A5",
+                    boxShadow: "0 20px 40px rgba(0,0,0,0.4)",
+                  }}
+                  className="bg-[#262626] rounded-xl p-6 border border-[#3A3A3A] transition-all duration-300 flex flex-col min-h-[420px]"
+                >
+                  <div className="flex justify-between items-start gap-3 mb-4">
+                    <div>
+                      <h3 className="text-xl font-semibold text-[#F6F1EB]">
+                        {project.title}
+                      </h3>
 
-                initial={{
-                  opacity: 0,
-                  y: 30
-                }}
+                      <p className="text-sm text-[#D8C3A5] mt-1">
+                        {project.subtitle}
+                      </p>
+                    </div>
 
-                whileInView={{
-                  opacity: 1,
-                  y: 0
-                }}
-
-                viewport={{
-                  once: true
-                }}
-
-                transition={{
-                  delay: index * 0.15,
-                  duration: 0.6
-                }}
-
-                whileHover={{
-                  y: -10,
-                  borderColor: '#D8C3A5',
-                  boxShadow: '0 20px 40px rgba(0,0,0,0.4)',
-                  transition: {
-                    type: "spring",
-                    stiffness: 300
-                  }
-                }}
-
-                className="
-                bg-[#262626]
-                rounded-xl
-                p-6
-                border
-                border-[#3A3A3A]
-                transition-all
-                duration-300
-                "
-              >
-
-
-                <h3 className="
-                text-xl
-                font-semibold
-                mb-3
-                text-[#F6F1EB]
-                ">
-                  {project.title}
-                </h3>
-
-
-                <p className="
-                text-[#B7B7B7]
-                text-sm
-                mb-4
-                leading-relaxed
-                ">
-                  {project.description}
-                </p>
-
-
-
-                <div className="
-                flex
-                flex-wrap
-                gap-2
-                mb-4
-                ">
-
-                  {project.tech.map((tech, i) => (
-
-                    <motion.span
-
-                      key={i}
-
-                      className="
-                      text-xs
-                      px-3
-                      py-1
-                      bg-[#D8C3A5]/10
-                      text-[#D8C3A5]
-                      rounded-full
-                      "
-
-                      whileHover={{
-                        scale: 1.1
-                      }}
-
+                    <span
+                      className={`shrink-0 inline-flex items-center gap-1.5 text-xs font-medium px-2.5 py-1 rounded-full border ${status.className}`}
                     >
-                      {tech}
-                    </motion.span>
+                      <StatusIcon />
+                      {status.label}
+                    </span>
+                  </div>
 
-                  ))}
+                  <p className="text-[#B7B7B7] text-sm mb-5 leading-relaxed">
+                    {project.description}
+                  </p>
 
-                </div>
+                  <div className="flex flex-wrap gap-2 mb-6">
+                    {project.tech.map((technology) => (
+                      <motion.span
+                        key={technology}
+                        className="text-xs px-3 py-1 bg-[#D8C3A5]/10 text-[#D8C3A5] rounded-full border border-[#D8C3A5]/10"
+                        whileHover={{ scale: 1.06 }}
+                      >
+                        {technology}
+                      </motion.span>
+                    ))}
+                  </div>
 
+                  <div className="flex items-center gap-5 pt-4 mt-auto border-t border-[#3A3A3A]">
+                    <ProjectLink
+                      href={project.github}
+                      icon={<FaGithub />}
+                    >
+                      Code
+                    </ProjectLink>
 
-
-                <div className="
-                flex
-                items-center
-                gap-4
-                pt-2
-                border-t
-                border-[#3A3A3A]
-                ">
-
-
-                  <motion.a
-
-                    href={project.github}
-
-                    className="
-                    text-[#B7B7B7]
-                    hover:text-[#D8C3A5]
-                    transition
-                    flex
-                    items-center
-                    gap-1
-                    text-sm
-                    "
-
-                    whileHover={{
-                      x: 3
-                    }}
-
-                  >
-
-                    <FaGithub />
-                    Code
-
-                  </motion.a>
-
-
-
-                  <motion.a
-
-                    href={project.live}
-
-                    className="
-                    text-[#B7B7B7]
-                    hover:text-[#D8C3A5]
-                    transition
-                    flex
-                    items-center
-                    gap-1
-                    text-sm
-                    "
-
-                    whileHover={{
-                      x: 3
-                    }}
-
-                  >
-
-                    <FaExternalLinkAlt />
-                    Live Demo
-
-                  </motion.a>
-
-
-                </div>
-
-
-              </motion.div>
-
-            ))}
-
+                    <ProjectLink
+                      href={project.live}
+                      icon={<FaExternalLinkAlt />}
+                    >
+                      Live Demo
+                    </ProjectLink>
+                  </div>
+                </motion.article>
+              );
+            })}
           </div>
-
-
         </motion.div>
-
       </div>
-
     </section>
   );
 };
-
 
 export default Projects;

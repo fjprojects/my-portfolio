@@ -1,53 +1,70 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { FaExternalLinkAlt } from 'react-icons/fa';
+import React, { useState } from "react";
+import { motion } from "framer-motion";
+import { FaExternalLinkAlt } from "react-icons/fa";
 
-// Import your assets
 import pythonCertificate from "../assets/python-certificate.pdf";
-import pythonThumbnail from "../assets/python-thumbnail.jpeg"; // ✅ Changed from .png to .jpeg
+import pythonThumbnail from "../assets/python-thumbnail.jpeg";
 import cCertificate from "../assets/c-programming-certificate.jpeg";
+import nthIndexCertificate from "../assets/nth-index.jpg";
 
 const Certificates = () => {
   const [imageErrors, setImageErrors] = useState({});
 
   const certificates = [
     {
-      id: 'python',
+      id: "python",
       title: "Crash Course on Python",
       issuer: "Google & Coursera",
-      image: pythonThumbnail, // ✅ Now works with .jpeg
+      image: pythonThumbnail,
       link: pythonCertificate,
       isPdf: true,
       date: "Jan 2026",
-      description: "Completed Google's Crash Course on Python covering Python fundamentals, control flow, functions, modules, file handling and object-oriented programming.",
+      description:
+        "Completed Google's Crash Course on Python covering Python fundamentals, control flow, functions, modules, file handling, and object-oriented programming.",
     },
     {
-      id: 'c',
+      id: "c",
       title: "C Programming",
       issuer: "Bullsnet Computer Education",
       image: cCertificate,
       link: cCertificate,
       isPdf: false,
       date: "Jul 2025",
-      description: "Successfully completed the C Programming course with an A+ grade. Built a strong foundation in C programming, including arrays, pointers, structures, file handling, memory management and introductory data structures.",
+      description:
+        "Successfully completed the C Programming course with an A+ grade, covering arrays, pointers, structures, file handling, memory management, and introductory data structures.",
+    },
+    {
+      id: "nth-index-react",
+      title: "React Developer Internship",
+      issuer: "Nth Index Software Solutions LLP",
+      image: nthIndexCertificate,
+      link: nthIndexCertificate,
+      isPdf: false,
+      date: "Jun 2026",
+      description:
+        "Completed a React.js web development internship from June 8 to June 30, 2026, demonstrating skills in responsive user-interface development and component-based architecture.",
     },
   ];
 
-  const handleImageError = (certId) => {
-    setImageErrors(prev => ({ ...prev, [certId]: true }));
+  const handleImageError = (certificateId) => {
+    setImageErrors((previous) => ({
+      ...previous,
+      [certificateId]: true,
+    }));
   };
 
-  const getFallbackImage = () => {
-    return 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="200"%3E%3Crect width="400" height="200" fill="%231A1A1A"/%3E%3Ctext x="200" y="110" font-size="60" text-anchor="middle" fill="%23D8C3A5"%3E📜%3C/text%3E%3C/svg%3E';
-  };
+  const getFallbackImage = () =>
+    'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="200"%3E%3Crect width="400" height="200" fill="%231A1A1A"/%3E%3Ctext x="200" y="120" font-size="60" text-anchor="middle" fill="%23D8C3A5"%3E%F0%9F%93%9C%3C/text%3E%3C/svg%3E';
 
-  const handleViewCertificate = (link, e) => {
-    e.preventDefault();
-    if (link && link !== '#') {
-      window.open(link, '_blank');
-    } else {
-      alert('Certificate link is not available yet.');
+  const handleViewCertificate = (link, event) => {
+    event.preventDefault();
+
+    if (link && link !== "#") {
+      window.open(link, "_blank", "noopener,noreferrer");
+      return;
     }
+
+    alert("Certificate link is not available yet.");
   };
 
   return (
@@ -58,48 +75,59 @@ const Certificates = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          {/* Header */}
           <div className="text-center mb-12">
             <h2 className="text-4xl md:text-5xl font-bold text-[#F6F1EB]">
               My <span className="text-[#D8C3A5]">Certificates</span>
             </h2>
+
             <p className="text-[#B7B7B7] max-w-2xl mx-auto mt-4">
-              Professional certifications that validate my skills and commitment to continuous learning.
+              Courses and internship credentials documenting my technical
+              learning and practical development experience.
             </p>
           </div>
 
-          {/* Certificates Grid */}
-          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            {certificates.map((cert, index) => (
-              <motion.div
-                key={cert.id}
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mx-auto">
+            {certificates.map((certificate, index) => (
+              <motion.article
+                key={certificate.id}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.15 }}
                 whileHover={{ y: -8 }}
-                className="bg-[#262626] rounded-xl overflow-hidden border border-[#3A3A3A] hover:border-[#D8C3A5]/30 transition-all duration-300 group"
+                className="bg-[#262626] rounded-xl overflow-hidden border border-[#3A3A3A] hover:border-[#D8C3A5]/30 transition-all duration-300 group flex flex-col"
               >
-                {/* Certificate Image - Clickable */}
-                <div 
+                <div
                   className="relative w-full h-56 bg-[#1A1A1A] overflow-hidden cursor-pointer"
-                  onClick={(e) => handleViewCertificate(cert.link, e)}
+                  onClick={(event) =>
+                    handleViewCertificate(certificate.link, event)
+                  }
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(event) => {
+                    if (event.key === "Enter" || event.key === " ") {
+                      handleViewCertificate(certificate.link, event);
+                    }
+                  }}
                 >
                   <img
-                    src={imageErrors[cert.id] ? getFallbackImage() : cert.image}
-                    alt={cert.title}
+                    src={
+                      imageErrors[certificate.id]
+                        ? getFallbackImage()
+                        : certificate.image
+                    }
+                    alt={`${certificate.title} certificate`}
                     className="w-full h-full object-contain bg-[#1A1A1A] p-3 transition-transform duration-500 group-hover:scale-105"
-                    onError={() => handleImageError(cert.id)}
+                    onError={() => handleImageError(certificate.id)}
                   />
-                  
-                  {/* Overlay gradient */}
+
                   <div className="absolute inset-0 bg-gradient-to-t from-[#262626] via-transparent to-transparent opacity-60 pointer-events-none" />
-                  
-                  {/* Date badge */}
+
                   <div className="absolute top-4 right-4 bg-[#151515]/80 backdrop-blur-sm px-3 py-1 rounded-full border border-[#3A3A3A]">
-                    <span className="text-xs text-[#D8C3A5]">{cert.date}</span>
+                    <span className="text-xs text-[#D8C3A5]">
+                      {certificate.date}
+                    </span>
                   </div>
 
-                  {/* Hover overlay */}
                   <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center pointer-events-none">
                     <span className="text-white text-sm font-medium bg-[#D8C3A5]/20 px-4 py-2 rounded-full border border-[#D8C3A5]/30 backdrop-blur-sm">
                       View Credential
@@ -107,32 +135,36 @@ const Certificates = () => {
                   </div>
                 </div>
 
-                {/* Content */}
-                <div className="p-6">
+                <div className="p-6 flex flex-col flex-grow">
                   <h3 className="text-xl font-semibold text-[#F6F1EB] mb-1">
-                    {cert.title}
+                    {certificate.title}
                   </h3>
+
                   <p className="text-[#D8C3A5] text-sm font-medium mb-2">
-                    {cert.issuer}
-                  </p>
-                  <p className="text-[#B7B7B7] text-sm leading-relaxed">
-                    {cert.description}
+                    {certificate.issuer}
                   </p>
 
-                  {/* View Credential Button */}
+                  <p className="text-[#B7B7B7] text-sm leading-relaxed">
+                    {certificate.description}
+                  </p>
+
                   <button
-                    onClick={(e) => handleViewCertificate(cert.link, e)}
-                    className="inline-flex items-center gap-2 mt-4 text-[#D8C3A5] hover:text-[#F6F1EB] transition-colors text-sm group-hover:gap-3 bg-transparent border-none cursor-pointer"
+                    onClick={(event) =>
+                      handleViewCertificate(certificate.link, event)
+                    }
+                    className="inline-flex items-center gap-2 mt-auto pt-5 text-[#D8C3A5] hover:text-[#F6F1EB] transition-colors text-sm group-hover:gap-3 bg-transparent border-none cursor-pointer"
                   >
                     View Credential
-                    <FaExternalLinkAlt size={12} className="transition-transform group-hover:translate-x-1" />
+                    <FaExternalLinkAlt
+                      size={12}
+                      className="transition-transform group-hover:translate-x-1"
+                    />
                   </button>
                 </div>
-              </motion.div>
+              </motion.article>
             ))}
           </div>
 
-          {/* Bottom Stats */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -140,20 +172,31 @@ const Certificates = () => {
             className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6 max-w-3xl mx-auto"
           >
             <div className="bg-[#262626] p-6 rounded-xl text-center border border-[#3A3A3A]">
-              <div className="text-3xl font-bold text-[#D8C3A5]">2</div>
-              <div className="text-sm text-[#B7B7B7] mt-1">Certifications</div>
+              <div className="text-3xl font-bold text-[#D8C3A5]">
+                {certificates.length}
+              </div>
+              <div className="text-sm text-[#B7B7B7] mt-1">
+                Credentials
+              </div>
             </div>
+
             <div className="bg-[#262626] p-6 rounded-xl text-center border border-[#3A3A3A]">
               <div className="text-3xl font-bold text-[#D8C3A5]">10+</div>
-              <div className="text-sm text-[#B7B7B7] mt-1">Technologies Learned</div>
+              <div className="text-sm text-[#B7B7B7] mt-1">
+                Technologies Learned
+              </div>
             </div>
+
             <div className="bg-[#262626] p-6 rounded-xl text-center border border-[#3A3A3A]">
-              <div className="text-3xl font-bold text-[#D8C3A5]">2025–26</div>
-              <div className="text-sm text-[#B7B7B7] mt-1">Active Learning</div>
+              <div className="text-3xl font-bold text-[#D8C3A5]">
+                2025–2026
+              </div>
+              <div className="text-sm text-[#B7B7B7] mt-1">
+                Active Learning
+              </div>
             </div>
           </motion.div>
 
-          {/* Call to Action */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -161,13 +204,14 @@ const Certificates = () => {
             className="text-center mt-12"
           >
             <p className="text-[#B7B7B7] text-sm">
-              Always learning. Always building.
+              Learning through courses, projects, and practical experience.
             </p>
+
             <a
               href="/contact"
               className="inline-block mt-4 px-6 py-2 bg-[#D8C3A5]/10 text-[#D8C3A5] rounded-full hover:bg-[#D8C3A5]/20 transition-colors text-sm border border-[#D8C3A5]/20"
             >
-              Let's discuss my skills
+              Discuss my experience
             </a>
           </motion.div>
         </motion.div>

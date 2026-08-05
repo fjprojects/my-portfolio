@@ -73,7 +73,7 @@ const Hero = () => {
   <FaArrowRight />
 </motion.a>
               <motion.a
-                href="#contact"
+                href="/contact"
                 whileHover={{
                   scale: 1.05,
                   borderColor: "#D8C3A5",
