@@ -34,11 +34,6 @@ const contactLinks = [
 const Contact = () => {
   const [showModal, setShowModal] = useState(false);
 
-  const [toast, setToast] = useState({
-    show: false,
-    message: "",
-  });
-
   useEffect(() => {
     const previousOverflow = document.body.style.overflow;
 
@@ -66,20 +61,6 @@ const Contact = () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
   }, []);
-
-  const showToastMessage = (message) => {
-    setToast({
-      show: true,
-      message,
-    });
-
-    setTimeout(() => {
-      setToast({
-        show: false,
-        message: "",
-      });
-    }, 3000);
-  };
 
   return (
     <section
@@ -190,20 +171,6 @@ const Contact = () => {
               Download Resume
             </motion.a>
           </motion.div>
-
-          {/* Toast */}
-          <AnimatePresence>
-            {toast.show && (
-              <motion.div
-                initial={{ opacity: 0, y: -50 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -50 }}
-                className="fixed left-1/2 top-8 z-[60] -translate-x-1/2 rounded-xl border border-[#D8C3A5] bg-[#1F1F1F] px-6 py-3 text-[#F6F1EB] shadow-2xl"
-              >
-                {toast.message}
-              </motion.div>
-            )}
-          </AnimatePresence>
 
           {/* Contact modal */}
           <AnimatePresence>
