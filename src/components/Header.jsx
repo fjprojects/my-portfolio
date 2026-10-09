@@ -3,7 +3,6 @@ import { motion } from "framer-motion";
 import {
   FaGithub,
   FaLinkedin,
-  FaTwitter,
   FaBars,
   FaTimes,
 } from "react-icons/fa";
@@ -126,15 +125,6 @@ const Header = () => {
             <FaLinkedin size={20} />
           </a>
 
-          <a
-            href="https://twitter.com/"
-            target="_blank"
-            rel="noreferrer"
-            aria-label="Twitter"
-            className="text-[#B7B7B7] transition-colors hover:text-[#D8C3A5]"
-          >
-            <FaTwitter size={20} />
-          </a>
         </div>
 
         {/* Mobile menu button */}
@@ -192,14 +182,6 @@ const Header = () => {
                   <FaLinkedin size={20} />
                 </a>
 
-                <a
-                  href="https://twitter.com/"
-                  target="_blank"
-                  rel="noreferrer"
-                  aria-label="Twitter"
-                >
-                  <FaTwitter size={20} />
-                </a>
               </div>
             )}
           </div>
