@@ -33,7 +33,7 @@ npm run build
 npm run dev
 ```
 
-Run `npm run check` for the source smoke tests, lint, and production build.
+Before merging, run `npm run lint` and `npm run build`. These checks have not yet been executed for this branch.
 
 ## Deployment
 Built with `npm run build`; the production output is `dist/`. When deploying with Render or another static host, configure SPA fallback to `/index.html` so routes like `/projects` load after a refresh.
