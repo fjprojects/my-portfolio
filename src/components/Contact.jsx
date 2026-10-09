@@ -6,7 +6,6 @@ import {
   FaGithub,
   FaHandshake,
   FaLinkedin,
-  FaPhone,
   FaTimes,
   FaUser,
 } from "react-icons/fa";
@@ -29,11 +28,6 @@ const contactLinks = [
     link: "https://github.com/fjprojects",
     label: "GitHub",
     target: "_blank",
-  },
-  {
-    icon: FaPhone,
-    label: "Phone",
-    isPhone: true,
   },
 ];
 
@@ -87,17 +81,6 @@ const Contact = () => {
     }, 3000);
   };
 
-  const handlePhoneClick = async () => {
-    const phoneNumber = "+917907698580";
-
-    try {
-      await navigator.clipboard.writeText(phoneNumber);
-      showToastMessage("Phone number copied ✓");
-    } catch (error) {
-      showToastMessage("Could not copy phone number");
-    }
-  };
-
   return (
     <section
       id="contact"
@@ -149,26 +132,6 @@ const Contact = () => {
             {contactLinks.map((item) => {
               const Icon = item.icon;
 
-              if (item.isPhone) {
-                return (
-                  <motion.button
-                    key={item.label}
-                    type="button"
-                    onClick={handlePhoneClick}
-                    title={item.label}
-                    aria-label={item.label}
-                    className="cursor-pointer rounded-full border border-[#3A3A3A] bg-[#262626] p-4 text-[#B7B7B7] transition hover:border-[#D8C3A5] hover:text-[#D8C3A5]"
-                    whileHover={{
-                      scale: 1.15,
-                      boxShadow: "0 0 30px rgba(216,195,165,0.15)",
-                    }}
-                    whileTap={{ scale: 0.9 }}
-                  >
-                    <Icon size={24} />
-                  </motion.button>
-                );
-              }
-
               return (
                 <motion.a
                   key={item.label}
@@ -212,8 +175,8 @@ const Contact = () => {
             </motion.button>
 
             <motion.a
-              href="/francis-job.pdf"
-              download="Francis-Job-Resume.pdf"
+              href="/francis-job.docx"
+              download="Francis-Job-Resume.docx"
               whileHover={{
                 y: -2,
                 scale: 1.03,
