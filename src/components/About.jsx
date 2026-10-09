@@ -45,10 +45,10 @@ const About = () => {
               viewport={{ once: true }}
               transition={{ delay: 0.5, duration: 0.6 }}
             >
-              I'm a Computer Science student who enjoys building modern web
-              applications and learning through real projects. I enjoy turning
-              ideas into clean, responsive, and interactive websites using
-              React and modern frontend tools.
+              I'm a B.Tech Computer Science and Engineering student at Christ
+              College of Engineering, Thrissur. I enjoy designing and
+              developing useful web applications with React, JavaScript,
+              Django, and Python.
             </motion.p>
 
             <motion.p
@@ -57,11 +57,11 @@ const About = () => {
               viewport={{ once: true }}
               transition={{ delay: 0.7, duration: 0.6 }}
             >
-              Alongside frontend development, I've explored backend development
-              with Django and Python while building projects such as OcuSense
-              AI, an eye-health monitoring web application. Every project helps
-              me improve my problem-solving skills and understand how complete
-              web applications are built.
+              I work on LabTwin, an AI-powered learning platform for programming
+              practice, adaptive assessments, and student progress tracking.
+              I'm also developing my full-stack and computer-vision skills
+              through OcuSense AI. These projects help me learn about
+              software architecture, testing, and building real products.
             </motion.p>
 
             <motion.p
@@ -70,10 +70,10 @@ const About = () => {
               viewport={{ once: true }}
               transition={{ delay: 0.9, duration: 0.6 }}
             >
-              I'm currently expanding my knowledge in full-stack development,
-              data structures, and software engineering while continuously
-              building projects, learning new technologies, and preparing for
-              internship opportunities.
+              I'm strengthening my foundations in data structures and algorithms,
+              backend engineering, databases, and software testing.
+              I'm open to software engineering internships, hackathon teams,
+              and collaboration with developers who enjoy solving problems.
             </motion.p>
           </motion.div>
         </motion.div>
