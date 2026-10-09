@@ -4,9 +4,19 @@ import { motion } from 'framer-motion';
 const CustomCursor = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
+  const [enabled, setEnabled] = useState(false);
   const [trail, setTrail] = useState([]);
 
   useEffect(() => {
+    const media = window.matchMedia('(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)');
+    const sync = () => setEnabled(media.matches);
+    sync();
+    media.addEventListener('change', sync);
+    return () => media.removeEventListener('change', sync);
+  }, []);
+
+  useEffect(() => {
+    if (!enabled) return;
     const updateMousePosition = (e) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
       setTrail(prev => {
@@ -20,7 +30,7 @@ const CustomCursor = () => {
 
     window.addEventListener('mousemove', updateMousePosition);
 
-    setTimeout(() => {
+    const timer = setTimeout(() => {
       const interactiveElements = document.querySelectorAll('a, button, input, textarea, select, [role="button"]');
       interactiveElements.forEach(el => {
         el.addEventListener('mouseenter', handleMouseEnter);
@@ -30,13 +40,16 @@ const CustomCursor = () => {
 
     return () => {
       window.removeEventListener('mousemove', updateMousePosition);
+      clearTimeout(timer);
       const interactiveElements = document.querySelectorAll('a, button, input, textarea, select, [role="button"]');
       interactiveElements.forEach(el => {
         el.removeEventListener('mouseenter', handleMouseEnter);
         el.removeEventListener('mouseleave', handleMouseLeave);
       });
     };
-  }, []);
+  }, [enabled]);
+
+  if (!enabled) return null;
 
   const cursorSize = isHovering ? 40 : 20;
 
