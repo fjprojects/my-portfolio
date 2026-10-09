@@ -36,7 +36,7 @@ const Hero = () => {
             transition={{ duration: 0.8 }}
           >
             <div className="inline-block px-4 py-2 rounded-full border border-[#D8C3A5]/30 bg-[#D8C3A5]/10 text-[#D8C3A5] text-sm mb-8">
-              ✦ Available for Freelance Work
+              ✦ Open to Internships & Hackathon Collaborations
             </div>
 
           <h1 className="text-5xl md:text-7xl font-bold leading-tight text-transparent bg-clip-text bg-gradient-to-r from-[#D8C3A5] to-[#B08968]">
@@ -45,14 +45,14 @@ const Hero = () => {
   I'm Francis
 </h1>
             <h2 className="text-2xl text-gray-300 mt-6">
-              Frontend Developer
+              Full-Stack Developer · B.Tech CSE Student
             </h2>
 
             <p className="text-gray-400 mt-8 leading-8 max-w-xl">
-              I create modern, responsive, and interactive websites using
-              React, Tailwind CSS, Framer Motion, and contemporary web
-              technologies. I enjoy building interfaces that feel fast,
-              elegant, and memorable.
+              I build full-stack web applications with React, Django, and Python.
+              My projects explore AI-powered learning, computer vision, and
+              practical software solutions. Currently growing through
+              hands-on projects and preparing for software engineering internships.
             </p>
 
             <div className="flex flex-wrap gap-5 mt-10">
