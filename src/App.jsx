@@ -17,7 +17,7 @@ import "./App.css";
 
 function App() {
   return (
-    <div className="min-h-screen flex flex-col bg-[#151515] text-[#F6F1EB] cursor-none">
+    <div className="min-h-screen flex flex-col bg-[#151515] text-[#F6F1EB] ">
       <CustomCursor />
 
       <Header />

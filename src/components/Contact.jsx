@@ -6,7 +6,6 @@ import {
   FaGithub,
   FaHandshake,
   FaLinkedin,
-  FaPhone,
   FaTimes,
   FaUser,
 } from "react-icons/fa";
@@ -30,20 +29,10 @@ const contactLinks = [
     label: "GitHub",
     target: "_blank",
   },
-  {
-    icon: FaPhone,
-    label: "Phone",
-    isPhone: true,
-  },
 ];
 
 const Contact = () => {
   const [showModal, setShowModal] = useState(false);
-
-  const [toast, setToast] = useState({
-    show: false,
-    message: "",
-  });
 
   useEffect(() => {
     const previousOverflow = document.body.style.overflow;
@@ -72,31 +61,6 @@ const Contact = () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
   }, []);
-
-  const showToastMessage = (message) => {
-    setToast({
-      show: true,
-      message,
-    });
-
-    setTimeout(() => {
-      setToast({
-        show: false,
-        message: "",
-      });
-    }, 3000);
-  };
-
-  const handlePhoneClick = async () => {
-    const phoneNumber = "+917907698580";
-
-    try {
-      await navigator.clipboard.writeText(phoneNumber);
-      showToastMessage("Phone number copied ✓");
-    } catch (error) {
-      showToastMessage("Could not copy phone number");
-    }
-  };
 
   return (
     <section
@@ -149,26 +113,6 @@ const Contact = () => {
             {contactLinks.map((item) => {
               const Icon = item.icon;
 
-              if (item.isPhone) {
-                return (
-                  <motion.button
-                    key={item.label}
-                    type="button"
-                    onClick={handlePhoneClick}
-                    title={item.label}
-                    aria-label={item.label}
-                    className="cursor-pointer rounded-full border border-[#3A3A3A] bg-[#262626] p-4 text-[#B7B7B7] transition hover:border-[#D8C3A5] hover:text-[#D8C3A5]"
-                    whileHover={{
-                      scale: 1.15,
-                      boxShadow: "0 0 30px rgba(216,195,165,0.15)",
-                    }}
-                    whileTap={{ scale: 0.9 }}
-                  >
-                    <Icon size={24} />
-                  </motion.button>
-                );
-              }
-
               return (
                 <motion.a
                   key={item.label}
@@ -212,8 +156,8 @@ const Contact = () => {
             </motion.button>
 
             <motion.a
-              href="/francis-job.pdf"
-              download="Francis-Job-Resume.pdf"
+              href="/francis-job.docx"
+              download="Francis-Job-Resume.docx"
               whileHover={{
                 y: -2,
                 scale: 1.03,
@@ -227,20 +171,6 @@ const Contact = () => {
               Download Resume
             </motion.a>
           </motion.div>
-
-          {/* Toast */}
-          <AnimatePresence>
-            {toast.show && (
-              <motion.div
-                initial={{ opacity: 0, y: -50 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -50 }}
-                className="fixed left-1/2 top-8 z-[60] -translate-x-1/2 rounded-xl border border-[#D8C3A5] bg-[#1F1F1F] px-6 py-3 text-[#F6F1EB] shadow-2xl"
-              >
-                {toast.message}
-              </motion.div>
-            )}
-          </AnimatePresence>
 
           {/* Contact modal */}
           <AnimatePresence>
