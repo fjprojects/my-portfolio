@@ -9,6 +9,22 @@ import {
 } from "react-icons/fa";
 const projects = [
   {
+    title: "LabTwin",
+    subtitle: "AI-Powered Personalized Learning Platform",
+    description:
+      "An educational platform in active development that brings coding practice, adaptive assessments, progressive AI hints, classroom tools, and learner progress tracking together. Features are being tested and refined.",
+    tech: [
+      "React",
+      "Django",
+      "Python",
+      "AI Integration",
+      "Adaptive Learning",
+    ],
+    status: "in-progress",
+    github: "https://github.com/fjprojects/LabTwin-Track-D-2026",
+    live: "#",
+  },
+  {
     title: "OcuSense AI",
     subtitle: "Eye Health Monitoring System",
     description:
@@ -21,7 +37,7 @@ const projects = [
       "Python",
       "Bootstrap",
     ],
-    status: "completed",
+    status: "in-progress",
     github: "https://github.com/fjprojects/OcuSense-AI",
     live: "https://ocusense-ai-13.onrender.com/",
   },
@@ -203,8 +219,8 @@ const Projects = () => {
             viewport={{ once: true }}
             transition={{ delay: 0.3 }}
           >
-            Full-stack, computer-vision, healthcare, and transport
-            projects I have completed, am developing, or plan to build.
+            Full-stack and AI projects, with clear progress statuses and links
+            to available source code or demonstrations.
           </motion.p>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
