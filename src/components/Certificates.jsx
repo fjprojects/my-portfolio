@@ -9,6 +9,7 @@ import nthIndexCertificate from "../assets/nth-index.jpg";
 
 const Certificates = () => {
   const [imageErrors, setImageErrors] = useState({});
+  const [loadedImages, setLoadedImages] = useState({});
 
   const certificates = [
     {
@@ -44,6 +45,42 @@ const Certificates = () => {
       description:
         "Completed a React.js web development internship from June 8 to June 30, 2026, demonstrating skills in responsive user-interface development and component-based architecture.",
     },
+    {
+      id: "agentic-ai-sprint",
+      title: "Agentic AI Product Build Sprint",
+      issuer: "Christ College of Engineering — CSE (Data Science)",
+      image: "/certificates/agentic-ai-sprint.webp",
+      link: "/certificates/agentic-ai-sprint.webp",
+      pendingAsset: true,
+      isPdf: false,
+      date: "Aug 2026",
+      description:
+        "Participated in the Agentic AI workshop on August 8, 2026, and the virtual Product Build Sprint held August 9–17, 2026.",
+    },
+    {
+      id: "master-git-github",
+      title: "Master Git & GitHub",
+      issuer: "IEEE Computer Society, Christ College of Engineering & Ekholon",
+      image: "/certificates/git-github-workshop.webp",
+      link: "/certificates/git-github-workshop.webp",
+      pendingAsset: true,
+      isPdf: false,
+      date: "Sep 2026",
+      description:
+        "Participated in the online Master Git & GitHub session on September 13, 2026, focused on modern development and version-control practices.",
+    },
+    {
+      id: "ai-conclave-hackathon",
+      title: "AI Conclave Hackathon 2026",
+      issuer: "Amal Jyothi College of Engineering",
+      image: "/certificates/ai-conclave-hackathon.webp",
+      link: "/certificates/ai-conclave-hackathon.webp",
+      pendingAsset: true,
+      isPdf: false,
+      date: "Sep 2026",
+      description:
+        "Participated in the hackathon held on September 16, 2026, as part of AI Conclave 2026 organized by Amal Jyothi College of Engineering.",
+    },
   ];
 
   const handleImageError = (certificateId) => {
@@ -56,15 +93,15 @@ const Certificates = () => {
   const getFallbackImage = () =>
     'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="200"%3E%3Crect width="400" height="200" fill="%231A1A1A"/%3E%3Ctext x="200" y="120" font-size="60" text-anchor="middle" fill="%23D8C3A5"%3E%F0%9F%93%9C%3C/text%3E%3C/svg%3E';
 
-  const handleViewCertificate = (link, event) => {
+  const canViewCertificate = (certificate) =>
+    Boolean(certificate.link && certificate.link !== "#") &&
+    (!certificate.pendingAsset || Boolean(loadedImages[certificate.id]));
+
+  const handleViewCertificate = (certificate, event) => {
     event.preventDefault();
-
-    if (link && link !== "#") {
-      window.open(link, "_blank", "noopener,noreferrer");
-      return;
+    if (canViewCertificate(certificate)) {
+      window.open(certificate.link, "_blank", "noopener,noreferrer");
     }
-
-    alert("Certificate link is not available yet.");
   };
 
   return (
@@ -117,27 +154,33 @@ const Certificates = () => {
                 <div
                   className="relative w-full h-56 bg-[#1A1A1A] overflow-hidden cursor-pointer"
                   onClick={(event) =>
-                    handleViewCertificate(certificate.link, event)
+                    handleViewCertificate(certificate, event)
                   }
                   role="button"
                   tabIndex={0}
                   aria-label={`View ${certificate.title} certificate`}
                   onKeyDown={(event) => {
                     if (event.key === "Enter" || event.key === " ") {
-                      handleViewCertificate(certificate.link, event);
+                      handleViewCertificate(certificate, event);
                     }
                   }}
                 >
-                  <img
-                    src={
-                      imageErrors[certificate.id]
-                        ? getFallbackImage()
-                        : certificate.image
-                    }
-                    alt={`${certificate.title} certificate`}
-                    className="w-full h-full object-contain bg-[#1A1A1A] p-3 transition-transform duration-500 group-hover:scale-105"
-                    onError={() => handleImageError(certificate.id)}
-                  />
+                  {certificate.pendingAsset && imageErrors[certificate.id] ? (
+                    <div className="h-full w-full flex flex-col items-center justify-center p-6 text-center gap-3 bg-[#222222]">
+                      <span className="text-xs uppercase tracking-[0.2em] text-[#D8C3A5]">Certificate of Participation</span>
+                      <span className="text-xl font-semibold text-[#F6F1EB]">{certificate.title}</span>
+                      <span className="text-xs text-[#B7B7B7]">{certificate.issuer}</span>
+                      <span className="text-xs text-[#999999]">Original image pending upload</span>
+                    </div>
+                  ) : (
+                    <img
+                      src={imageErrors[certificate.id] ? getFallbackImage() : certificate.image}
+                      alt={`${certificate.title} certificate`}
+                      className="w-full h-full object-contain bg-[#1A1A1A] p-3 transition-transform duration-500 group-hover:scale-105"
+                      onLoad={() => setLoadedImages((previous) => ({ ...previous, [certificate.id]: true }))}
+                      onError={() => handleImageError(certificate.id)}
+                    />
+                  )}
 
                   <div className="absolute inset-0 bg-gradient-to-t from-[#262626] via-transparent to-transparent opacity-60 pointer-events-none" />
 
@@ -170,11 +213,12 @@ const Certificates = () => {
                   <button
                     type="button"
                     onClick={(event) =>
-                      handleViewCertificate(certificate.link, event)
+                      handleViewCertificate(certificate, event)
                     }
-                    className="inline-flex items-center gap-2 mt-auto pt-5 text-[#D8C3A5] hover:text-[#F6F1EB] transition-all text-sm group-hover:gap-3 bg-transparent border-none cursor-pointer"
+                    disabled={!canViewCertificate(certificate)}
+                    className="inline-flex items-center gap-2 mt-auto pt-5 text-[#D8C3A5] hover:text-[#F6F1EB] transition-all text-sm group-hover:gap-3 bg-transparent border-none cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    View Credential
+                    {canViewCertificate(certificate) ? "View Credential" : "Preview pending"}
 
                     <FaExternalLinkAlt
                       size={12}
