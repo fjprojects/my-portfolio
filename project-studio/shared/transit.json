@@ -1,0 +1,24 @@
+{
+  "notice": "Synthetic demonstration network near Thrissur. Routes, fares, running times and schedules are not real transport information.",
+  "stops": [
+    {"id":"swaraj","name":"Swaraj Round","lat":10.5241,"lng":76.2133},
+    {"id":"north","name":"North Bus Stand","lat":10.5316,"lng":76.2135},
+    {"id":"railway","name":"Railway Station","lat":10.5144,"lng":76.2074},
+    {"id":"westfort","name":"West Fort","lat":10.5245,"lng":76.2014},
+    {"id":"punkunnam","name":"Punkunnam","lat":10.5371,"lng":76.2024},
+    {"id":"viyyoor","name":"Viyyoor","lat":10.5550,"lng":76.2200},
+    {"id":"mannuthy","name":"Mannuthy","lat":10.5297,"lng":76.2594},
+    {"id":"eastfort","name":"East Fort","lat":10.5221,"lng":76.2279},
+    {"id":"ollur","name":"Ollur","lat":10.4761,"lng":76.2357},
+    {"id":"koorkenchery","name":"Koorkenchery","lat":10.5020,"lng":76.2149},
+    {"id":"ayyanthole","name":"Ayyanthole","lat":10.5318,"lng":76.1885},
+    {"id":"museum","name":"Museum Annex (no demo service)","lat":10.5401,"lng":76.2222}
+  ],
+  "routes": [
+    {"id":"D1","name":"North line","color":"#17634e","stops":["railway","swaraj","north","viyyoor"],"minutes":[0,8,14,26],"headway":20,"first":330,"last":1290,"base_fare":12,"per_stop":4},
+    {"id":"D2","name":"East line","color":"#a44d32","stops":["westfort","swaraj","eastfort","mannuthy"],"minutes":[0,7,15,31],"headway":25,"first":345,"last":1275,"base_fare":12,"per_stop":5},
+    {"id":"D3","name":"West loop","color":"#5563a5","stops":["ayyanthole","westfort","punkunnam","north"],"minutes":[0,10,19,28],"headway":30,"first":360,"last":1260,"base_fare":10,"per_stop":4},
+    {"id":"D4","name":"South line","color":"#967023","stops":["ollur","koorkenchery","railway","swaraj"],"minutes":[0,18,28,36],"headway":30,"first":330,"last":1290,"base_fare":14,"per_stop":5},
+    {"id":"D5","name":"Cross-town","color":"#447f94","stops":["ayyanthole","punkunnam","swaraj","eastfort"],"minutes":[0,12,24,34],"headway":45,"first":360,"last":1260,"base_fare":15,"per_stop":3}
+  ]
+}
