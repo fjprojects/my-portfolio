@@ -74,19 +74,20 @@ const projects = [
     live: "#",
   },
   {
-    title: "AI Study Analyzer",
-    subtitle: "Study Performance Analytics Platform",
+    title: "LabTwin",
+    subtitle: "AI-Powered Adaptive Lab Tutoring Platform",
     description:
-      "A React and Django application that records structured study sessions and displays performance history. The current prototype is still under development.",
+      "An evolving AI-assisted programming lab and personalized tutoring platform with coding exercises, automatic test evaluation, targeted hints, practice recommendations, adaptive quizzes, viva-style assessments, and learner progress tracking. Multimodal learning and cited course-material answers are under development.",
     tech: [
       "React",
       "Django",
-      "REST API",
       "Python",
-      "SQLite",
+      "REST API",
+      "AI Tutoring",
+      "Adaptive Learning",
     ],
     status: "in-progress",
-    github: "#",
+    github: "https://github.com/fjprojects/LabTwin-Track-D-2026",
     live: "#",
   },
   {
