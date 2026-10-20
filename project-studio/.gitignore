@@ -1,0 +1,10 @@
+node_modules/
+dist/
+__pycache__/
+*.py[cod]
+*.sqlite3
+.env
+.venv/
+.pytest_cache/
+backend/staticfiles/
+.openai/*.tar.gz

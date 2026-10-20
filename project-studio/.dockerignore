@@ -1,0 +1,11 @@
+node_modules
+.git
+.openai
+.env
+.venv
+**/__pycache__
+**/*.sqlite3
+backend/staticfiles
+dist
+tests
+docs

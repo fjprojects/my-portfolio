@@ -29,19 +29,12 @@ const projects = [
     title: "Timberly",
     subtitle: "Furniture E-Commerce Platform",
     description:
-      "A responsive furniture shopping platform with product browsing, category sections, cart management, reusable components, interactive sliders, routing, and planned backend integration.",
-    tech: [
-      "React",
-      "Vite",
-      "React Router",
-      "Swiper",
-      "Django",
-    ],
+      "A working furniture-shopping prototype with product and room filters, a persistent cart, stock-checked demo checkout, and order history. Built with React and Django; real payment and fulfillment integration remain planned.",
+    tech: ["React","Vite","React Router","Django","REST API"],
     status: "in-progress",
-    github: "#",
+    github: "https://github.com/fjprojects/my-portfolio/blob/feat/four-project-prototypes-20261020/project-studio/frontend/src/projects/Timberly.jsx",
     live: "#",
-  },
-  {
+  },  {
     title: "Developer Portfolio",
     subtitle: "Personal Portfolio Website",
     description:
@@ -61,19 +54,12 @@ const projects = [
     title: "Bus Route Information System",
     subtitle: "Public Transport Route Assistant",
     description:
-      "A planned transport platform that helps users search bus routes, discover stops, compare possible journeys, and access route information through a simple interface.",
-    tech: [
-      "React",
-      "Django",
-      "REST API",
-      "Maps",
-      "PostgreSQL",
-    ],
-    status: "upcoming",
-    github: "#",
+      "A working route-planning prototype with stop discovery, timetable search, direct and one-transfer journeys, fare comparison, maps, and saved journeys. Uses clearly labelled synthetic route data.",
+    tech: ["React","Django","REST API","Leaflet Maps","PostgreSQL Support"],
+    status: "in-progress",
+    github: "https://github.com/fjprojects/my-portfolio/blob/feat/four-project-prototypes-20261020/project-studio/frontend/src/projects/BusApp.jsx",
     live: "#",
-  },
-  {
+  },  {
     title: "LabTwin",
     subtitle: "AI-Powered Adaptive Lab Tutoring Platform",
     description:
@@ -92,39 +78,23 @@ const projects = [
   },
   {
     title: "AI Recovery Assistant",
-    subtitle: "Camera-Based Rehabilitation Support",
+    subtitle: "Movement Measurement Prototype",
     description:
-      "A planned computer-vision system that analyzes prescribed physiotherapy exercises, measures joint angles, counts correct repetitions, detects movement errors, and tracks recovery progress.",
-    tech: [
-      "React",
-      "Django",
-      "MediaPipe Pose",
-      "OpenCV",
-      "Computer Vision",
-      "Python",
-    ],
-    status: "upcoming",
-    github: "#",
+      "An experimental movement-measurement prototype with camera and local-video pose tracking, joint-angle measurements, full-cycle counting, adjustable targets, and session history. Clinical accuracy has not been validated.",
+    tech: ["React","Django","MediaPipe Pose","Computer Vision","Python"],
+    status: "in-progress",
+    github: "https://github.com/fjprojects/my-portfolio/blob/feat/four-project-prototypes-20261020/project-studio/frontend/src/projects/MotionStudio.jsx",
     live: "#",
-  },
-  {
+  },  {
     title: "GaitGuardian",
-    subtitle: "Mobility and Fall-Risk Monitoring",
+    subtitle: "Walking Pattern Explorer",
     description:
-      "A future healthcare computer-vision system designed to analyze walking patterns, track mobility changes, measure gait symmetry, speed, balance, and hesitation, and alert caregivers to meaningful decline.",
-    tech: [
-      "React",
-      "Django",
-      "MediaPipe Pose",
-      "OpenCV",
-      "Time-Series Analysis",
-      "Python",
-    ],
-    status: "upcoming",
-    github: "#",
+      "An experimental walking-pattern prototype with estimated steps, cadence, temporal symmetry, optional measured-distance speed, session comparisons, and CSV export. It does not provide validated fall-risk prediction.",
+    tech: ["React","Django","MediaPipe Pose","Time-Series Analysis","Python"],
+    status: "in-progress",
+    github: "https://github.com/fjprojects/my-portfolio/blob/feat/four-project-prototypes-20261020/project-studio/frontend/src/projects/MotionStudio.jsx",
     live: "#",
-  },
-];
+  },];
 
 const statusConfig = {
   completed: {
