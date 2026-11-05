@@ -212,8 +212,8 @@ const Contact = () => {
             </motion.button>
 
             <motion.a
-              href="/francis-job.pdf"
-              download="Francis-Job-Resume.pdf"
+              href="/francis-job.docx"
+              download="Francis-Job-Resume.docx"
               whileHover={{
                 y: -2,
                 scale: 1.03,
