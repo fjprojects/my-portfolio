@@ -81,6 +81,30 @@ const Certificates = () => {
       description:
         "Participated in the hackathon held on September 16, 2026, as part of AI Conclave 2026 organized by Amal Jyothi College of Engineering.",
     },
+    {
+      id: "multimodal-ai-hackathon-2026",
+      title: "Multimodal AI Hackathon 2026",
+      issuer: "KamandPrompt, IIT Mandi",
+      image: "/certificates/multimodal-ai-hackathon-2026.pdf",
+      link: "/certificates/multimodal-ai-hackathon-2026.pdf",
+      isPdfPreview: true,
+      isPdf: true,
+      date: "Oct 2026",
+      description:
+        "Secured Rank 7 in Track D as part of Team LabTwin at the Multimodal AI Hackathon 2026, organized by KamandPrompt, IIT Mandi, with AugLi.ai and PurpleRain Tech.",
+    },
+    {
+      id: "nptel-electronic-systems-design",
+      title: "Electronic Systems Design: Hands-on Circuits and PCB Design with CAD Software",
+      issuer: "NPTEL, IIT Madras",
+      image: "/certificates/nptel-electronic-systems-design.pdf",
+      link: "/certificates/nptel-electronic-systems-design.pdf",
+      isPdfPreview: true,
+      isPdf: true,
+      date: "Oct 2026",
+      description:
+        "Earned an Elite certificate with a consolidated score of 66% in NPTEL's 12-week course conducted from July to October 2026.",
+    },
   ];
 
   const handleImageError = (certificateId) => {
@@ -172,6 +196,13 @@ const Certificates = () => {
                       <span className="text-xs text-[#B7B7B7]">{certificate.issuer}</span>
                       <span className="text-xs text-[#999999]">Original image pending upload</span>
                     </div>
+                  ) : certificate.isPdfPreview ? (
+                    <iframe
+                      src={`${certificate.image}#toolbar=0&navpanes=0&scrollbar=0&view=FitH`}
+                      title={`${certificate.title} preview`}
+                      className="w-full h-full border-0 pointer-events-none bg-white"
+                      onLoad={() => setLoadedImages((previous) => ({ ...previous, [certificate.id]: true }))}
+                    />
                   ) : (
                     <img
                       src={imageErrors[certificate.id] ? getFallbackImage() : certificate.image}
