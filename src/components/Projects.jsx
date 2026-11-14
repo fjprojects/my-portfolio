@@ -27,19 +27,20 @@ const projects = [
   },
   {
     title: "Timberly",
-    subtitle: "Furniture E-Commerce Platform",
+    subtitle: "Full-Stack Furniture E-Commerce Platform",
     description:
-      "A responsive furniture shopping platform with product browsing, category sections, cart management, reusable components, interactive sliders, routing, and planned backend integration.",
+      "A full-stack furniture storefront with searchable and filterable products, product detail pages, a persistent cart, JWT authentication, demo checkout, order history, contact submissions, and Django admin management.",
     tech: [
       "React",
       "Vite",
-      "React Router",
-      "Swiper",
       "Django",
+      "Django REST Framework",
+      "PostgreSQL-ready",
+      "JWT",
     ],
-    status: "in-progress",
-    github: "#",
-    live: "#",
+    status: "completed",
+    github: "https://github.com/fjprojects/Timberly",
+    live: "https://timberly-store.onrender.com/",
   },
   {
     title: "Developer Portfolio",
