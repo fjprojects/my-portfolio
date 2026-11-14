@@ -43,6 +43,24 @@ const projects = [
     live: "https://timberly-store.onrender.com/",
   },
   {
+    title: "ArthaShield",
+    subtitle: "Privacy-First Financial Companion",
+    description:
+      "A privacy-focused finance platform that imports bank statements and SMS alerts, categorises transactions, distinguishes recurring commitments from spending patterns, detects own-account transfers, and provides an EMI reality check using XIRR. Financial figures are calculated by deterministic Python logic; optional AI commentary receives sanitized data and never performs the arithmetic.",
+    tech: [
+      "React",
+      "Vite",
+      "Django REST Framework",
+      "Python",
+      "Financial Analytics",
+      "PII Sanitization",
+      "PostgreSQL",
+    ],
+    status: "completed",
+    github: "https://github.com/fjprojects/Arthasheild",
+    live: "https://arthasheild.vercel.app/",
+  },
+  {
     title: "Developer Portfolio",
     subtitle: "Personal Portfolio Website",
     description:
