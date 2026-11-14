@@ -111,20 +111,21 @@ const projects = [
   },
   {
     title: "LabTwin — Track D",
-    subtitle: "Multimodal Adaptive Tutoring & Programming Lab",
+    subtitle: "Multimodal AI Tutoring & Adaptive Programming Lab",
     description:
-      "An AI-assisted learning platform combining source-grounded course tutoring, adaptive assessments, Bayesian learner modelling, programming labs, hidden-test evaluation, progressive hints, viva practice, and teacher insights. Its wider deployment requires persistent data storage and dedicated background-processing services.",
+      "A multimodal learning platform that turns teacher-uploaded course materials into source-grounded tutoring with page, slide, and timestamp citations. It combines verified adaptive assessments, Bayesian Knowledge Tracing (BKT), personalized learning paths, Python/C/Java programming practice with hidden-test evaluation, progressive hints, viva practice, and teacher insights. Advanced speech, raster-vision, and semantic evaluation paths still require live-provider validation; the linked demo is a release-preview snapshot.",
     tech: [
-      "React",
+      "React 19",
       "Django",
       "Python",
-      "Multimodal RAG",
-      "BKT",
-      "Adaptive Learning",
+      "Chroma RAG",
+      "Bayesian Knowledge Tracing",
+      "Adaptive Assessments",
+      "Code Evaluation",
     ],
     status: "in-progress",
     github: "https://github.com/fjprojects/LabTwin-Track-D-2026",
-    live: "#",
+    live: "https://labtwin-release-preview-20261015.onrender.com/",
   },
   {
     title: "AI Recovery Assistant",
