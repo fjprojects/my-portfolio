@@ -92,8 +92,8 @@ const projects = [
       "Sample Network",
     ],
     status: "in-progress",
-    github: "https://github.com/fjprojects/my-portfolio/blob/main/public/demos/bus-route/index.html",
-    live: "https://francis-portfolio-bqnn.onrender.com/demos/bus-route/",
+    github: "https://github.com/fjprojects/my-portfolio/tree/main/public/demos/bus-route",
+    live: "https://wayfinder-bus-route-starter.vercel.app/",
   },
   {
     title: "LabTwin Alexa+",
@@ -147,8 +147,8 @@ const projects = [
       "Computer Vision (Planned)",
     ],
     status: "in-progress",
-    github: "https://github.com/fjprojects/my-portfolio/blob/main/public/demos/ai-recovery/index.html",
-    live: "https://francis-portfolio-bqnn.onrender.com/demos/ai-recovery/",
+    github: "https://github.com/fjprojects/my-portfolio/tree/main/public/demos/ai-recovery",
+    live: "https://reform-ai-recovery-starter.vercel.app/",
   },
   {
     title: "GaitGuardian",
@@ -164,8 +164,8 @@ const projects = [
       "Computer Vision (Planned)",
     ],
     status: "in-progress",
-    github: "https://github.com/fjprojects/my-portfolio/blob/main/public/demos/gaitguardian/index.html",
-    live: "https://francis-portfolio-bqnn.onrender.com/demos/gaitguardian/",
+    github: "https://github.com/fjprojects/my-portfolio/tree/main/public/demos/gaitguardian",
+    live: "https://gaitguardian-mobility-starter.vercel.app/",
   },
 ];
 
