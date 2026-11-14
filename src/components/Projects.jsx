@@ -75,16 +75,33 @@ const projects = [
     live: "#",
   },
   {
-    title: "LabTwin",
-    subtitle: "AI-Powered Adaptive Lab Tutoring Platform",
+    title: "LabTwin Alexa+",
+    subtitle: "Voice-First AI Learning Companion",
     description:
-      "An evolving AI-assisted programming lab and personalized tutoring platform with coding exercises, automatic test evaluation, targeted hints, practice recommendations, adaptive quizzes, viva-style assessments, and learner progress tracking. Multimodal learning and cited course-material answers are under development.",
+      "An Alexa+-style learning companion that uses browser voice interaction, multi-turn context, grounded course-note retrieval with source citations, adaptive quizzes, server-side answer grading, and Bayesian Knowledge Tracing (BKT) to recommend what learners should study next. Built as an independent hackathon prototype; it is not an official Amazon Alexa+ skill.",
+    tech: [
+      "React",
+      "Django",
+      "Web Speech API",
+      "RAG",
+      "JWT",
+      "Bayesian Knowledge Tracing",
+    ],
+    status: "completed",
+    github: "#",
+    live: "https://labtwin-frontend.onrender.com/",
+  },
+  {
+    title: "LabTwin — Track D",
+    subtitle: "Multimodal Adaptive Tutoring & Programming Lab",
+    description:
+      "An AI-assisted learning platform combining source-grounded course tutoring, adaptive assessments, Bayesian learner modelling, programming labs, hidden-test evaluation, progressive hints, viva practice, and teacher insights. Its wider deployment requires persistent data storage and dedicated background-processing services.",
     tech: [
       "React",
       "Django",
       "Python",
-      "REST API",
-      "AI Tutoring",
+      "Multimodal RAG",
+      "BKT",
       "Adaptive Learning",
     ],
     status: "in-progress",
