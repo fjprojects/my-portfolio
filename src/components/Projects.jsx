@@ -93,7 +93,7 @@ const projects = [
     ],
     status: "in-progress",
     github: "https://github.com/fjprojects/my-portfolio/tree/main/public/demos/bus-route",
-    live: "https://wayfinder-bus-route-starter.vercel.app/",
+    live: "https://wayfinder-bus-route-starter-francisjobmaliakkalll-5729.vercel.app/",
   },
   {
     title: "LabTwin Alexa+",
@@ -148,7 +148,7 @@ const projects = [
     ],
     status: "in-progress",
     github: "https://github.com/fjprojects/my-portfolio/tree/main/public/demos/ai-recovery",
-    live: "https://reform-ai-recovery-starter.vercel.app/",
+    live: "https://reform-ai-recovery-starter-francisjobmaliakkalll-5729.vercel.app/",
   },
   {
     title: "GaitGuardian",
@@ -165,7 +165,7 @@ const projects = [
     ],
     status: "in-progress",
     github: "https://github.com/fjprojects/my-portfolio/tree/main/public/demos/gaitguardian",
-    live: "https://gaitguardian-mobility-starter.vercel.app/",
+    live: "https://gaitguardian-mobility-starter-francisjobmaliakkalll-5729.vercel.app/",
   },
 ];
 
