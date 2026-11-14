@@ -9,21 +9,23 @@ import {
 } from "react-icons/fa";
 const projects = [
   {
-    title: "OcuSense AI",
-    subtitle: "Eye Health Monitoring System",
+    title: "OcuSense AI 13",
+    subtitle: "AI-Powered Eye Wellness Platform",
     description:
-      "A full-stack screen-wellness platform that uses computer vision to monitor blink rate, estimated screen distance, head position, focus duration, hydration, medicine reminders, and monitoring history.",
+      "A full-stack eye-wellness platform with webcam-based blink monitoring, screen-distance and posture cues, focus tracking, hydration and medicine reminders, and monitoring history. The React frontend is deployed on Vercel and connects to the Django API hosted on Render.",
     tech: [
       "React",
+      "Create React App",
       "Django",
       "MediaPipe",
       "Computer Vision",
       "Python",
-      "Bootstrap",
+      "Vercel",
+      "Render",
     ],
     status: "completed",
     github: "https://github.com/fjprojects/OcuSense-AI",
-    live: "https://ocusense-ai-13.onrender.com/",
+    live: "https://ocusense-ai-13-frontend.vercel.app/",
   },
   {
     title: "Timberly",
